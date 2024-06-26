@@ -27,7 +27,7 @@ Some of the environment variables used for the Docker configuration are inherite
 Clone the repository:
 
 ```
-git clone https://github.com/PlusGenie/ib-gateway-docker
+git clone https://github.com/bondjames12/ib-gateway-docker
 ```
 
 
@@ -75,7 +75,7 @@ VNC Server: 127.0.0.1:5900
 
 ### How to Access Web App and Ngrok
 
-After running docker-compose successfully, you can access the web application using a browser. The Dockerfile pulls the source of the web application from https://github.com/PlusGenie/tradingview-webhooks-bot . 
+After running docker-compose successfully, you can access the web application using a browser. The Dockerfile pulls the source of the web application from https://github.com/bondjames12/tradingview-webhooks-bot . 
 
 Then go to http://127.0.0.1:5000
 
