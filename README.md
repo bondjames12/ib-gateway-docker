@@ -54,7 +54,7 @@ NGROK_AUTH: Authentication Token for NGROK as needed.
 Once these steps are complete, you can run Tbot on Tradingboat Docker using the following command:
 
 ```
-docker-compose up --build
+docker compose up --build
 ```
 
 
