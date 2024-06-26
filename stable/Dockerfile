@@ -108,10 +108,10 @@ COPY ./tbot/tbot_run.sh /home/tbot/tbot_run.sh
 RUN chmod a+x /home/tbot/tbot_run.sh
 
 # TBOT: Set default git repository and allow user to override
-ARG TBOT_TRADINGBOAT_GIT_REPO=https://github.com/PlusGenie/tbot-tradingboat.git
+ARG TBOT_TRADINGBOAT_GIT_REPO=https://github.com/bondjames12/tbot-tradingboat.git
 ARG TBOT_TRADINGBOAT_GIT_BRANCH=main
 
-ARG TBOT_TVWB_GIT_REPO=https://github.com/PlusGenie/tradingview-webhooks-bot.git
+ARG TBOT_TVWB_GIT_REPO=https://github.com/bondjames12/tradingview-webhooks-bot.git
 ARG TBOT_TVWB_GIT_BRANCH=main
 
 # Add GitHub to known hosts for SSH, copy SSH keys, and clone repository conditionally
