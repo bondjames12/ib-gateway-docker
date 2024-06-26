@@ -16,7 +16,7 @@ This repository allows for the quick launch of TradingBoat using Docker. Trading
 
 Some of the environment variables used for the Docker configuration are inherited from the Interactive Brokers Gateway Docker project. Additionally, this repository introduces its own environment variables that control other components such as NGROK, Flask, Redis, and TBOT.
 
-![TradingBoat-Docker](https://user-images.githubusercontent.com/1986788/226738416-4fe3275b-e116-4f6e-9372-0aea9f4ee9fd.png)
+![image](https://github.com/bondjames12/ib-gateway-docker/assets/492840/cffb673e-1b70-4a26-8ff0-b3499a25218e)
 
  
 
@@ -67,10 +67,10 @@ Please use VNC Viewer to access the IB Gateway via the VNC server.
 
 VNC Server: 127.0.0.1:5900
 
+![image](https://github.com/bondjames12/ib-gateway-docker/assets/492840/50336b7f-3b57-4656-b6ce-5c52428da0da)
 
-![VNC_Viewer](https://user-images.githubusercontent.com/1986788/226739017-c6f15476-2960-4d4e-a334-8d6b8892dc7c.png)
+![image](https://github.com/bondjames12/ib-gateway-docker/assets/492840/da01ccf7-6bef-463b-831a-2057e4bbe930)
 
-![VNC_Viwer_IB](https://user-images.githubusercontent.com/1986788/226739107-183ccada-b605-4e13-82a2-56209933c0c4.png)
 
 
 ### How to Access Web App and Ngrok
@@ -79,7 +79,8 @@ After running docker-compose successfully, you can access the web application us
 
 Then go to http://127.0.0.1:5000
 
-![WEBAPP_TVWB_TBOT_DECODER](https://user-images.githubusercontent.com/1986788/226739163-9b8fa027-fbeb-486e-9ca2-fa6aadf28fb2.png)
+![image](https://github.com/bondjames12/ib-gateway-docker/assets/492840/3cefc34a-ed84-4a1c-b7f4-d29be23a16eb)
+
 
 ### Demo 
 Here's how to launch TBOT on TradingBoat using Docker in just 5 minutes. [Watch the demo on YouTube.](https://www.youtube.com/watch?v=lHgoKOgaiw4)
