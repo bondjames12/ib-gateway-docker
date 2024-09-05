@@ -32,16 +32,15 @@ services:
       TBOT_DISCORD_WEBHOOK: ${TBOT_DISCORD_WEBHOOK:-}
       TBOT_TELEGRAM_TOKEN: ${TBOT_TELEGRAM_TOKEN:-}
       TBOT_TELEGRAM_CHAT_ID: ${TBOT_TELEGRAM_CHAT_ID:-}
-      TBOT_NGROK: ${TBOT_NGROK:-}
       TBOT_PROFILER: ${TBOT_PROFILER:-False}
     ports:
+      - "127.0.0.1:4000:4000"
       - "127.0.0.1:4001:4001"
       - "127.0.0.1:4002:4002"
-      - "0.0.0.0:5900:5900"
-      - "0.0.0.0:5000:5000"
+      - "0.0.0.0:59000:5900"
+      - "0.0.0.0:50000:5000"
     depends_on:
       - redis
-      - ngrok
 
   redis:
     image: redis:7.0.10-alpine
@@ -49,17 +48,3 @@ services:
     container_name: redis-on-tradingboat
     ports:
       - "0.0.0.0:6379:6379"
-
-  ngrok:
-    image: ngrok/ngrok:3.5.0-alpine
-    restart: always
-    container_name: ngrok-on-tradingboat
-    command:
-      - http
-      - "${NGROK_PORT}"
-    ports:
-      - "4040:4040"
-    environment:
-      NGROK_AUTHTOKEN: ${NGROK_AUTH}
-      NGROK_REGION: us
-      NGROK_PORT: ${NGROK_PORT:-}
