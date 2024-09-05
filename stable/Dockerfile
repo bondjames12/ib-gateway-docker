@@ -76,7 +76,8 @@ RUN apt-get install --no-install-recommends --yes \
   openssh-client \
   net-tools \
   vim \
-  dos2unix
+  dos2unix \
+  telnet
 
 # Copy files
 COPY --from=setup /root/ .

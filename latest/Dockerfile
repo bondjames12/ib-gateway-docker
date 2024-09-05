@@ -65,7 +65,8 @@ RUN apt-get install --no-install-recommends --yes \
   libxi6 \
   libgtk2.0-bin \
   socat \
-  x11vnc
+  x11vnc \
+  telnet
 
 # Copy files
 COPY --from=setup /root/ .
