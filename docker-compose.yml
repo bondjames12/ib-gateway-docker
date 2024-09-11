@@ -2,7 +2,7 @@ version: "3.4"
 
 services:
   ib-gateway:
-    restart: always
+#    restart: always
     container_name: tbot-on-tradingboat
     build:
       context: ./stable

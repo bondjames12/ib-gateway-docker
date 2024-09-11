@@ -34,6 +34,13 @@ RUN chmod a+x ./ibgateway-${IB_GATEWAY_VERSION}-standalone-linux-x64.sh
 RUN ./ibgateway-${IB_GATEWAY_VERSION}-standalone-linux-x64.sh -q -dir /root/Jts/ibgateway/${IB_GATEWAY_VERSION}
 COPY ./config/ibgateway/jts.ini /root/Jts/jts.ini
 
+#Install IB TWS
+RUN curl -sSL https://github.com/bondjames12/tbot-tradingboat/releases/download/v1.1.2/tws-stable-x64-10.19.2o.sh \
+  --output tws-standalone-linux-x64.sh
+RUN chmod a+x ./tws-standalone-linux-x64.sh
+RUN ./tws-standalone-linux-x64.sh -q -dir /root/Jts/ibgateway/tws
+RUN cp -r /root/Jts/ibgateway/tws/ /root/Jts/ibgateway/10.23.2a/
+
 # Install IBC
 RUN curl -sSL https://github.com/IbcAlpha/IBC/releases/download/${IBC_VERSION}/IBCLinux-${IBC_VERSION}.zip --output IBCLinux-${IBC_VERSION}.zip
 RUN mkdir /root/ibc
