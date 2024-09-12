@@ -84,7 +84,8 @@ RUN apt-get install --no-install-recommends --yes \
   net-tools \
   vim \
   dos2unix \
-  telnet
+  telnet \
+  libgtk-3-dev
 
 # Copy files
 COPY --from=setup /root/ .
