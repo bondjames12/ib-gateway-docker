@@ -9,9 +9,9 @@
 FROM ubuntu:22.04 as setup
 
 
-ENV IB_GATEWAY_VERSION=10.23.2a
-ENV IB_GATEWAY_RELEASE_CHANNEL=latest
-ENV IBC_VERSION=3.17.0
+ENV IB_GATEWAY_VERSION=10.30.1t
+ENV IB_GATEWAY_RELEASE_CHANNEL=stable
+ENV IBC_VERSION=3.20.0
 
 # Prepare system
 RUN apt-get update -y
@@ -35,11 +35,11 @@ RUN ./ibgateway-${IB_GATEWAY_VERSION}-standalone-linux-x64.sh -q -dir /root/Jts/
 COPY ./config/ibgateway/jts.ini /root/Jts/jts.ini
 
 #Install IB TWS
-RUN curl -sSL https://github.com/bondjames12/tbot-tradingboat/releases/download/v1.1.2/tws-stable-x64-10.19.2o.sh \
+RUN curl -sSL https://github.com/bondjames12/tbot-tradingboat/releases/download/tws${IB_GATEWAY_VERSION}/tws-${IB_GATEWAY_RELEASE_CHANNEL}-x64-${IB_GATEWAY_VERSION}.sh \
   --output tws-standalone-linux-x64.sh
 RUN chmod a+x ./tws-standalone-linux-x64.sh
 RUN ./tws-standalone-linux-x64.sh -q -dir /root/Jts/ibgateway/tws
-RUN cp -r /root/Jts/ibgateway/tws/ /root/Jts/ibgateway/10.23.2a/
+RUN cp -r /root/Jts/ibgateway/tws/ /root/Jts/ibgateway/${IB_GATEWAY_VERSION}/
 
 # Install IBC
 RUN curl -sSL https://github.com/IbcAlpha/IBC/releases/download/${IBC_VERSION}/IBCLinux-${IBC_VERSION}.zip --output IBCLinux-${IBC_VERSION}.zip
@@ -58,7 +58,7 @@ COPY ./scripts /root/scripts
 
 FROM ubuntu:22.04
 
-ENV IB_GATEWAY_VERSION=10.23.2a
+ENV IB_GATEWAY_VERSION=10.30.1t
 
 WORKDIR /root
 
