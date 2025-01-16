@@ -2,7 +2,7 @@ version: "3.4"
 
 services:
   ib-gateway:
-#    restart: always
+    restart: always
     container_name: tbot-on-tradingboat
     build:
       context: ./stable
@@ -38,7 +38,7 @@ services:
     ports:
       - "127.0.0.1:4000:4000"
       - "127.0.0.1:4001:4001"
-      - "127.0.0.1:4002:4002"
+      - "0.0.0.0:4002:4002"
       - "0.0.0.0:59000:5900"
       - "0.0.0.0:50000:5000"
     depends_on:
@@ -50,3 +50,5 @@ services:
     container_name: redis-on-tradingboat
     ports:
       - "0.0.0.0:6379:6379"
+
+
