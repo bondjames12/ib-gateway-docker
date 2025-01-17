@@ -6,21 +6,26 @@
 # production image and consume unnecessary space.
 #
 
-FROM ubuntu:22.04 as setup
+FROM ubuntu:24.04 as setup
 
 
 ENV IB_GATEWAY_VERSION=10.30.1t
 ENV IB_GATEWAY_RELEASE_CHANNEL=stable
 ENV IBC_VERSION=3.20.0
 
+WORKDIR /tmp/setup
+
 # Prepare system
-RUN apt-get update -y
-RUN apt-get install --no-install-recommends --yes \
+RUN apt-get update -y && \
+  DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends --yes \
   curl \
   ca-certificates \
-  unzip
-
-WORKDIR /tmp/setup
+  unzip \
+  libnspr4 libnss3 libcrypto++8 xdg-utils xfce4-cpugraph-plugin \
+  xfce4-netload-plugin xfce4-taskmanager xfce4-xkb-plugin xfce4-notes \
+  gvfs gvfs-backends gvfs-fuse && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
 
 # Install IB Gateway
 # Use this instead of "RUN curl .." to install a local file:
@@ -32,7 +37,6 @@ RUN curl -sSL https://github.com/UnusualAlpha/ib-gateway-docker/releases/downloa
 RUN sha256sum --check ./ibgateway-${IB_GATEWAY_VERSION}-standalone-linux-x64.sh.sha256
 RUN chmod a+x ./ibgateway-${IB_GATEWAY_VERSION}-standalone-linux-x64.sh
 RUN ./ibgateway-${IB_GATEWAY_VERSION}-standalone-linux-x64.sh -q -dir /root/Jts/ibgateway/${IB_GATEWAY_VERSION}
-COPY ./config/ibgateway/jts.ini /root/Jts/jts.ini
 
 #Install IB TWS
 RUN curl -sSL https://github.com/bondjames12/tbot-tradingboat/releases/download/tws${IB_GATEWAY_VERSION}/tws-${IB_GATEWAY_RELEASE_CHANNEL}-x64-${IB_GATEWAY_VERSION}.sh \
@@ -40,6 +44,8 @@ RUN curl -sSL https://github.com/bondjames12/tbot-tradingboat/releases/download/
 RUN chmod a+x ./tws-standalone-linux-x64.sh
 RUN ./tws-standalone-linux-x64.sh -q -dir /root/Jts/ibgateway/tws
 RUN cp -r /root/Jts/ibgateway/tws/ /root/Jts/ibgateway/${IB_GATEWAY_VERSION}/
+COPY ./config/ibgateway/jts.ini /root/Jts/jts.ini
+RUN sed -i 's/-Xmx768m/-Xmx2048m/' /root/Jts/ibgateway/${IB_GATEWAY_VERSION}/ibgateway.vmoptions
 
 # Install IBC
 RUN curl -sSL https://github.com/IbcAlpha/IBC/releases/download/${IBC_VERSION}/IBCLinux-${IBC_VERSION}.zip --output IBCLinux-${IBC_VERSION}.zip
@@ -56,7 +62,7 @@ COPY ./scripts /root/scripts
 # Build Stage: build production image
 #
 
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 ENV IB_GATEWAY_VERSION=10.30.1t
 
@@ -86,6 +92,39 @@ RUN apt-get install --no-install-recommends --yes \
   dos2unix \
   telnet \
   libgtk-3-dev
+
+RUN apt install -y \
+    libatk-bridge2.0-0 \
+    libatk1.0-0 \
+    libatspi2.0-0 \
+    libc6 \
+    libcairo2  \
+    libcups2 \
+    libdbus-1-3 \
+    libdrm2 \
+    libexpat1 \
+    libfontconfig1 \
+    libgbm1 \
+    libgcc-s1 \
+    libglib2.0-0 \
+    libgtk-3-0 \
+    libnspr4 \
+    libnss3 \
+    libpango-1.0-0 \
+    libpulse0 \
+    libx11-6 \
+    libxcb1 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxext6 \
+    libxfixes3 \
+    libxkbcommon0 \
+    libxrandr2 \
+    libxshmfence1 \
+    libxtst6 \
+    xdg-utils \
+    libcrypto++8 \
+    liboss4-salsa-asound2
 
 # Copy files
 COPY --from=setup /root/ .

@@ -4,10 +4,14 @@ services:
   ib-gateway:
     restart: always
     container_name: tbot-on-tradingboat
+    shm_size: "2gb" #optional
     build:
       context: ./stable
+      no_cache: true
       args:
         TBOT_TRADINGBOAT_GIT_REPO: ${TBOT_TRADINGBOAT_GIT_REPO:-https://github.com/bondjames12/tbot-tradingboat.git}
+    devices:
+      - /dev/dri:/dev/dri #recomende
     environment:
       TWS_USERID: ${TWS_USERID}
       TWS_PASSWORD: ${TWS_PASSWORD}
