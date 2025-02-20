@@ -74,6 +74,10 @@ RUN apt-get update -y &&  DEBIAN_FRONTEND=noninteractive apt-get install -y tzda
 RUN apt-get install --no-install-recommends --yes \
   gettext \
   xvfb \
+  libx11-dev \
+  libxext-dev \
+  libxi-dev \
+  libxtst-dev \
   libxslt-dev \
   libxrender1 \
   libxtst6 \
@@ -125,6 +129,11 @@ RUN apt install -y \
     xdg-utils \
     libcrypto++8 \
     liboss4-salsa-asound2
+
+#install rustdesk
+RUN wget https://github.com/rustdesk/rustdesk/releases/download/1.3.7/rustdesk-1.3.7-x86_64.deb && \
+    dpkg -i rustdesk-1.3.7-x86_64.deb || apt-get install -f -y && \
+    rm rustdesk-1.3.7-x86_64.deb
 
 # Copy files
 COPY --from=setup /root/ .
