@@ -65,6 +65,7 @@ COPY ./scripts /root/scripts
 FROM ubuntu:24.04
 
 ENV IB_GATEWAY_VERSION=10.30.1t
+ENV TZ=America/New_York
 
 WORKDIR /root
 
@@ -131,9 +132,9 @@ RUN apt install -y \
     liboss4-salsa-asound2
 
 #install rustdesk
-RUN wget https://github.com/rustdesk/rustdesk/releases/download/1.3.7/rustdesk-1.3.7-x86_64.deb && \
-    dpkg -i rustdesk-1.3.7-x86_64.deb || apt-get install -f -y && \
-    rm rustdesk-1.3.7-x86_64.deb
+RUN wget https://github.com/rustdesk/rustdesk/releases/download/1.3.8/rustdesk-1.3.8-x86_64.deb && \
+    dpkg -i rustdesk-1.3.8-x86_64.deb || apt-get install -f -y && \
+    rm rustdesk-1.3.8-x86_64.deb
 
 # Copy files
 COPY --from=setup /root/ .

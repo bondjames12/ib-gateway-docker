@@ -13,6 +13,7 @@ services:
     devices:
       - /dev/dri:/dev/dri #recomende
     environment:
+      TZ: America/New_York
       TWS_USERID: ${TWS_USERID}
       TWS_PASSWORD: ${TWS_PASSWORD}
       TRADING_MODE: ${TRADING_MODE:-paper}
